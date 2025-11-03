@@ -1,0 +1,10 @@
+[tool.poetry]
+name = "TotWebhookServer"
+version = "1.0.0"
+description = "Basic webhook server that forwards Tot Admin webhook payloads to a Discord server."
+authors = ["Matthew Dean <mjdean1994@gmail.com"]
+
+[tool.poetry.dependencies]
+python = "^3.13"
+fastapi = "~0.120.4"
+discord.py = "~2.6.4"
