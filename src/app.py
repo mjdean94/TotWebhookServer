@@ -27,14 +27,14 @@ async def receive_tot_chat_logs(message, sender, character, radius, location, ch
         actor = sender
 
     channel_shortname = channel
-    if channel == 1:
+    if channel == "1":
         channel_shortname = "Global"
-    if channel == 2:
+    if channel == "2":
         channel_shortname = "Local"
-    if channel == 3:
+    if channel == "3":
         channel_shortname = "Clan"
 
-    if channel == 2:
+    if channel == "2":
         log_entry = f"`[{channel_shortname}][{radius}] {actor}: {message}`"
     else:
         log_entry = f"`[{channel_shortname}] {actor}: {message}`"
