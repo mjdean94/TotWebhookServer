@@ -13,7 +13,7 @@ async def root():
 @app.get("/tot")
 async def receive_tot_webhook(date, steamId, charName, actName, eventId, eventCategory, eventType, params):
 
-    log_entry = f"[{date}] EventType={eventType}, EventCategory={eventCategory} Actor={charName}, Params=[{params}]"
+    log_entry = f"[{date}] EventType={eventId}, Actor={charName}, Params=[{params}]"
 
     webhook = SyncWebhook.from_url(config.audit_log_url)
     webhook.send(log_entry)
