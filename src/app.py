@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from discord import SyncWebhook
 import json
+from datetime import datetime, timezone
 
 from . import config
 
@@ -26,6 +27,8 @@ async def receive_tot_chat_logs(message, sender, character, radius, location, ch
     else:
         actor = sender
 
+    timestamp = datetime.now(tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
     channel_shortname = channel
     if channel == "1":
         channel_shortname = "Global"
@@ -35,9 +38,9 @@ async def receive_tot_chat_logs(message, sender, character, radius, location, ch
         channel_shortname = "Clan"
 
     if channel == "2":
-        log_entry = f"`[{channel_shortname}][{radius}] {actor}: {message}`"
+        log_entry = f"`[{timestamp}][{channel_shortname}][{radius}] {actor}: {message}`"
     else:
-        log_entry = f"`[{channel_shortname}] {actor}: {message}`"
+        log_entry = f"`[{timestamp}][{channel_shortname}] {actor}: {message}`"
 
     webhook = SyncWebhook.from_url(config.chat_url)
     webhook.send(log_entry)
