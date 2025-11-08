@@ -1,6 +1,7 @@
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from discord import SyncWebhook
-import json
+import os
 from datetime import datetime, timezone
 
 from . import config
@@ -45,3 +46,8 @@ async def receive_tot_chat_logs(message, sender, character, radius, location, ch
     webhook = SyncWebhook.from_url(config.chat_url)
     webhook.send(log_entry)
     return "OK"
+
+@app.get("/characterscreen")
+async def get_character_screen():
+    file_path = os.path.join(path, "src/characterscreen.mp4")
+    return FileResponse(file_path, filename="characterscreen.mp4")
